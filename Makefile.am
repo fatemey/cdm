@@ -8,6 +8,7 @@ Dune_SOURCES= \
 	dune_evolution.cc \
 	flux_stationary.cc \
 	globals.cc \
+	main.cc \
 	initsurf.cc \
 	rotatematrix.cc \
 	initsurfwaves.cc \
@@ -31,9 +32,8 @@ Dune_SOURCES= \
 	influx.cc \
 	shore.cc \
 	vegetation.cc
-	main.cc
 Dune_CXXFLAGS=\
-	-I/opt/local/include
+	-I/opt/local/include -L/opt/local/lib -lfftw3
 
 lib_LTLIBRARIES=libcdm.la
 libcdm_la_SOURCES= \
@@ -64,8 +64,7 @@ libcdm_la_SOURCES= \
 	influx.cc \
 	shore.cc \
 	vegetation.cc
-	main.cc
 libcdm_la_INCLUDES=\
 	bmi.h
 libcdm_la_CXXFLAGS=\
-	-I$(top_srcdir)/include -I/opt/local/include
+	-I$(top_srcdir)/include -I/opt/local/include -L/opt/local/lib -lfftw3
