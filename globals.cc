@@ -2,6 +2,7 @@
  $Id: globals.cc,v 1.22 2005/04/13 15:00:18 parteli Exp $
  ******************************************************************************/
 
+#include <string.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

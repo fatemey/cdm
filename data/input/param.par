@@ -17,7 +17,7 @@ Nt0 = 0 		# to continue a previous simulation Nt0 = Nt of prev.
 
 save.every  = 200 	# nuber of iterations between saved files (such that the number of saved files are Nt/save.every)
 save.x-line = 0     # changing to 1 will reverse the reading of rows vs. columns; for Gnu plot set to 0, to reverse set to 1
-save.dir    = ./DATA # name of directory where output data is stored
+save.dir    = ./data/output # name of directory where output data is stored
 
 calc.x_periodic = 0 	# 0: is open; 1: is periodic b.c.
 calc.y_periodic = 1 	# 0: is open; 1: is periodic b.c.

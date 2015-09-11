@@ -4,8 +4,8 @@
 
 ###### Include and library path for FFTW
 
-FFTW_INC = /usr/local/include
-FFTW_LIB = /usr/local/lib
+FFTW_INC = /opt/local/include
+FFTW_LIB = /opt/local/lib
 
 ###### Compiler, tools and options
 
@@ -38,8 +38,6 @@ HEADERS = $(HEADERS_MAIN:main.h=)
 
 Dune:	$(OBJECTS) $(PT_OBJECTS)
 	$(LINK) -o $@ $^ $(LFLAGS)
-	
-	cp Dune /Users/orencioduranvinent/bin/Dune_pnas
 
 %.o:	%.cc
 	$(C++) -c $(CFLAGS) $(INCPATH) -o $@ $<
