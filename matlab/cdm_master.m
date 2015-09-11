@@ -4,19 +4,19 @@
 %% pull out shear stress and vegetation information
 
 %% INPUTS
-project.directory = '/home/ncohn/dune/testing/case1/'; 
+project.directory = pwd;
 project.windspeed = [sin(0:1:100)*0.25+0.25]; %currently in bed shear stress, m/s; can have multiple values each of length project.duration; 0.2 = around threhold, 0.5 = storm type winds
 project.duration = 24; %in hours of each individual simulation
 project.timestep = 1; %time step in hours within each simulation, should be evenly divisable in project.duration
 project.saveinterval = 24; %save every x number of time steps
-project.exeDir = '/home/ncohn/dune/DuneEXE/Dune'; %%in linux or macos terms (should be where the model exe is actually being run from)
+project.exeDir = '../../Dune'; %%in linux or macos terms (should be where the model exe is actually being run from)
 project.plot_data = 1; %put if you want to plot output
 
-grid.z_file = '/home/ncohn/dune/testing/init_h.dat';
+grid.z_file = 'init_h.dat';
 grid.dx = 2; %dx = dy in CDM, in meters
 
-veg.veg_file_x = '/home/ncohn/dune/testing/init_vx.dat';
-veg.veg_file_y = '/home/ncohn/dune/testing/init_vy.dat';
+veg.veg_file_x = 'init_vx.dat';
+veg.veg_file_y = 'init_vy.dat';
 veg.zmin = 5; %threshold elevation for veg growth
 veg.sigma = 0.75; %ratio of plant basal to frontal area
 veg.beta = 150; %ratio of plant drag coefficient to bare sand
