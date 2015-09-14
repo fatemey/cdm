@@ -63,7 +63,8 @@ libcdm_la_SOURCES= \
 	wind.cc \
 	influx.cc \
 	shore.cc \
-	vegetation.cc
+	vegetation.cc \
+	bmi.cc
 libcdm_la_INCLUDES=\
 	bmi.h
 libcdm_la_CXXFLAGS=\
