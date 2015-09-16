@@ -3,8 +3,10 @@
  ******************************************************************************/
 
 #include <stdlib.h>
+#include <string.h>
 #include <float.h>
 #include <math.h>
+#include <new>
 
 #include "globals.h"
 #include "dune_evolution.h"
@@ -20,7 +22,6 @@
 #include "analyze_new.h"
 
 #include "func.h"
-
 
 //*****************************************************************************
 //  class dune_evol_3d
@@ -156,6 +157,15 @@ void dune_evol_3d::save_arrays()
     save_2d_vecarray( "flux", m_flux );
 }
 
+void dune_evol_3d::get_var(const char* name, void** ptr)
+{
+  if (strcmp(name, "h") == 0)
+    get_2d_scalarray(m_h, ptr);
+  else if (strcmp(name, "shear_x") == 0)
+    get_2d_vecarray(m_tau, 1, ptr);
+  else if (strcmp(name, "shear_y") == 0)
+    get_2d_vecarray(m_tau, 2, ptr);
+}
 
 /*!  This is the function which computes the actual change in the surface
  profile.  The method for time evolution is forward Euler.  First, the shear

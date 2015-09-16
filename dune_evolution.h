@@ -55,6 +55,8 @@ public:
     virtual void save_arrays();
     
     virtual double step_implementation();
+
+    virtual void get_var(const char* name, void** ptr);
     
 protected:
     virtual double update_height(double halfmeanLength);

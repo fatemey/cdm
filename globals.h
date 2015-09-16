@@ -263,6 +263,8 @@ protected:
     void save_2d_scalarray( string basename, const TFktScal& data );
     void save_2d_vecarray( string basename, const TFktVec& data );
     void save_1d_scalarray( string basename, const CFunc1d& data );
+    void get_2d_scalarray( const TFktScal& data, void** ptr );
+    void get_2d_vecarray( const TFktVec& data, int idx, void** ptr );
     
 private:
     /*!  True if x is to be the column index in the saved files (varying along a

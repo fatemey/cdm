@@ -71,6 +71,10 @@ extern "C" {
     /* Set a slice of the variable from contiguous memory using start / count multi-dimensional indices */
     BMI_API void set_var_slice(const char *name, const int *start, const int *count, const void *ptr);
 
+    BMI_API void inq_compound(const char *name);
+
+    BMI_API void inq_compound_field(const char *name, int *field);
+
     /* logger to be set from outside so we can log messages */
     typedef void (CALLCONV *Logger)(Level level, const char *msg);
 

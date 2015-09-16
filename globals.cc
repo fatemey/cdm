@@ -594,7 +594,7 @@ void dunedata::save_2d_scalarray( string basename, const TFktScal& data )
 {
     ofstream *os;
     int x, y;
-    
+
     if( m_par.getdefault( "dontsave." + basename, false, false ) )
         return;
     os= open_writeout( basename );
@@ -602,7 +602,7 @@ void dunedata::save_2d_scalarray( string basename, const TFktScal& data )
     // PARTELI BEGIN
     if( duneglobals::high_precision()) (*os) << fixed << setprecision(16);
     // PARTELI END
-    
+
     if( m_xline )
         for( y= 0; y< data.SizeY(); ++y ) {
             for( x= 0; x< data.SizeX(); ++x )
@@ -689,3 +689,48 @@ void dunedata::save_1d_scalarray( string basename, const CFunc1d& data )
     delete os;
 }
 
+
+void dunedata::get_2d_scalarray( const TFktScal& data, void** ptr )
+{
+  int i, j;
+  int x = data.SizeX();
+  int y = data.SizeY();
+  double * arr_2d_double;
+  
+  arr_2d_double = new double [x*y];
+  *ptr = arr_2d_double;
+  if( m_xline )
+    for (j=0; j<data.SizeY(); ++j) {
+      for (i=0; i<data.SizeX(); ++i)
+        arr_2d_double[j*x+i] = data(i, j);
+    }
+  else
+    for (i=0; i<data.SizeX(); ++i) {
+      for (j=0; j<data.SizeY(); ++j) 
+        arr_2d_double[j*x+i] = data(i, j);
+    }
+  delete [] arr_2d_double;
+}
+
+
+void dunedata::get_2d_vecarray( const TFktVec& data, int idx, void** ptr )
+{
+  int i, j;
+  int x = data.SizeX();
+  int y = data.SizeY();
+  double * arr_2d_double;
+  
+  arr_2d_double = new double [x*y];
+  *ptr = arr_2d_double;
+  if( m_xline )
+    for (j=0; j<data.SizeY(); ++j) {
+      for (i=0; i<data.SizeX(); ++i)
+        arr_2d_double[j*x+i] = data(i, j)[idx];
+    }
+  else
+    for (i=0; i<data.SizeX(); ++i) {
+      for (j=0; j<data.SizeY(); ++j) 
+        arr_2d_double[j*x+i] = data(i, j)[idx];
+    }
+  delete [] arr_2d_double;
+}

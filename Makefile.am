@@ -33,7 +33,7 @@ Dune_SOURCES= \
 	shore.cc \
 	vegetation.cc
 Dune_CXXFLAGS=\
-	-I/opt/local/include -L/opt/local/lib -lfftw3
+	-I/opt/local/include -L/opt/local/lib -lfftw3 -std=c++11
 
 lib_LTLIBRARIES=libcdm.la
 libcdm_la_SOURCES= \
@@ -68,4 +68,4 @@ libcdm_la_SOURCES= \
 libcdm_la_INCLUDES=\
 	bmi.h
 libcdm_la_CXXFLAGS=\
-	-I$(top_srcdir)/include -I/opt/local/include -L/opt/local/lib -lfftw3
+	-I$(top_srcdir)/include -I/opt/local/include -L/opt/local/lib -lfftw3 -std=c++11
