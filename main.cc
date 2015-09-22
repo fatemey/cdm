@@ -3,9 +3,9 @@
 ******************************************************************************/
 
 #include <time.h>
-#include <sys/utsname.h>
+//#include <sys/utsname.h>
 #include <sys/types.h>
-#include <unistd.h>
+//#include <unistd.h>
 
 #include "globals.h"
 #include "dune_evolution.h"
@@ -39,11 +39,11 @@ parameter file version, a CPde object (for backward compatibility; version <
 CApp::CApp(int argc, char **argv) : m_evol(0)
 
 {
-  struct utsname u;
+  //struct utsname u;
   time_t t= time(NULL);
   
-  if( !uname(&u) )
-    cout << "Running on " << u.nodename << ", machine type " << u.machine << ", with process id " << getpid() << "\n";
+  //if( !uname(&u) )
+  //  cout << "Running on " << u.nodename << ", machine type " << u.machine << ", with process id " << getpid() << "\n";
   cout << ctime( &t ) << "\n";
 
   // find name for parameter file

@@ -2,9 +2,11 @@
  $Id: wind.cc,v 1.5 2004/12/22 10:21:57 schatz Exp $
  ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <random>
 
 #include <fstream>
 #include <ctype.h>
@@ -118,7 +120,8 @@ wind_flatrand::wind_flatrand(const dunepar& par)
     m_dir0= par.getdefault( "flatwind.avgdir", 0.0 ) / 360.0;
     m_ddir= par.getrequired<double>( "flatwind.ddir" ) / 360.0;
     
-    initstate( time(NULL), m_statearray, 256 );
+    //initstate( time(NULL), m_statearray, 256 );
+	srand(time(NULL));  
 }
 
 
@@ -128,19 +131,19 @@ wind_flatrand::wind_flatrand(const dunepar& par)
 
 void wind_flatrand::advance( double )
 {
-    char *prevrngstate;
+    //char *prevrngstate;
     
-    prevrngstate= setstate(m_statearray);
+    //prevrngstate= setstate(m_statearray);
     if( m_ddir==0.0 )
         m_dir= m_dir0;
     else
-        m_dir= m_dir0 + m_ddir * 2.0 * ((double)random()/(double)RAND_MAX - 0.5);
+        m_dir= m_dir0 + m_ddir * 2.0 * ((double)rand()/(double)RAND_MAX - 0.5);
     if( m_dustar==0.0 )
         m_ustar= m_ustar0;
     else
         m_ustar= m_ustar0 +
-	    m_dustar * 2.0 * ((double)random()/(double)RAND_MAX - 0.5);
-    setstate(prevrngstate);
+	    m_dustar * 2.0 * ((double)rand()/(double)RAND_MAX - 0.5);
+    //setstate(prevrngstate);
 }
 
 

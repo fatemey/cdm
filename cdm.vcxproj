@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BBB5049F-0AFD-4063-9373-78619CF9BFC4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>cdm</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include/fftw3/</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>include\fftw3\libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy include\fftw3\*.dll bin\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include/fftw3/</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>include\fftw3\libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy include\fftw3\*.dll bin\$(Configuration)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="analyze.h" />
+    <ClInclude Include="analyze_new.h" />
+    <ClInclude Include="avalanche.h" />
+    <ClInclude Include="dune_evolution.h" />
+    <ClInclude Include="evolution.h" />
+    <ClInclude Include="flux_stationary.h" />
+    <ClInclude Include="func.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="influx.h" />
+    <ClInclude Include="initsurf.h" />
+    <ClInclude Include="initsurfalea.h" />
+    <ClInclude Include="initsurfbeach.h" />
+    <ClInclude Include="initsurfcone.h" />
+    <ClInclude Include="initsurfgauss.h" />
+    <ClInclude Include="initsurfmatlab.h" />
+    <ClInclude Include="initsurfparabol.h" />
+    <ClInclude Include="initsurfwaves.h" />
+    <ClInclude Include="iter_aval_new.h" />
+    <ClInclude Include="physics_const.h" />
+    <ClInclude Include="PTG_FileNames.h" />
+    <ClInclude Include="PTG_Func.h" />
+    <ClInclude Include="PTG_Func2d.h" />
+    <ClInclude Include="PTG_Func2dScalar.h" />
+    <ClInclude Include="PTG_Func2dVec.h" />
+    <ClInclude Include="rfftw12d.h" />
+    <ClInclude Include="rotatematrix.h" />
+    <ClInclude Include="save.h" />
+    <ClInclude Include="sepbubble.h" />
+    <ClInclude Include="shear.h" />
+    <ClInclude Include="shear_hlr.h" />
+    <ClInclude Include="shore.h" />
+    <ClInclude Include="vec.h" />
+    <ClInclude Include="vegetation.h" />
+    <ClInclude Include="wind.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="analyze.cc" />
+    <ClCompile Include="analyze_new.cc" />
+    <ClCompile Include="avalanche.cc" />
+    <ClCompile Include="dune_evolution.cc" />
+    <ClCompile Include="evolution.cc" />
+    <ClCompile Include="flux_stationary.cc" />
+    <ClCompile Include="func.cc" />
+    <ClCompile Include="globals.cc" />
+    <ClCompile Include="influx.cc" />
+    <ClCompile Include="initsurf.cc" />
+    <ClCompile Include="initsurfalea.cc" />
+    <ClCompile Include="initsurfbeach.cc" />
+    <ClCompile Include="initsurfcone.cc" />
+    <ClCompile Include="initsurfgauss.cc" />
+    <ClCompile Include="initsurfmatlab.cc" />
+    <ClCompile Include="initsurfparabol.cc" />
+    <ClCompile Include="initsurfwaves.cc" />
+    <ClCompile Include="iter_aval_new.cc" />
+    <ClCompile Include="main.cc" />
+    <ClCompile Include="PTG_Func2dScalar.cc" />
+    <ClCompile Include="PTG_Func2dVec.cc" />
+    <ClCompile Include="rfftw12d.cc" />
+    <ClCompile Include="rotatematrix.cc" />
+    <ClCompile Include="save.cc" />
+    <ClCompile Include="sepbubble.cc" />
+    <ClCompile Include="shear.cc" />
+    <ClCompile Include="shear_hlr.cc" />
+    <ClCompile Include="shore.cc" />
+    <ClCompile Include="utils.cc" />
+    <ClCompile Include="vegetation.cc" />
+    <ClCompile Include="wind.cc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

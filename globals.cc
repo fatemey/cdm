@@ -2,17 +2,19 @@
  $Id: globals.cc,v 1.22 2005/04/13 15:00:18 parteli Exp $
  ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <string.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <errno.h>
 #include <math.h>
 
 #include <sstream>
 #include <iomanip>
 
+#include "utils.h"
 #include "globals.h"
 #include "evolution.h"
 #include "rfftw12d.h"

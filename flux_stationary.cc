@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "physics_const.h"
+#include "utils.h"
 #include "globals.h"
 
 #include "flux_stationary.h"

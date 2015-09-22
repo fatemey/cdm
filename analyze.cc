@@ -1,5 +1,6 @@
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <string>
-
 #include "analyze.h"
 
 using std::string;
@@ -282,13 +283,13 @@ void CAnalyze::Calc(int t, double dDT, double dInFlux, double dOutFlux,
   
   // ---- volume / mass ----
 
-  const double dVol = m_h.Integrate();
+  const double dVol = m_h.Integrate(0);
   
-  const double dVoldt = m_dh.Integrate()/dDT;
+  const double dVoldt = m_dh.Integrate(0)/dDT;
   
   // ---- erosion-deposition integral ----
   
-  double dVol_ex = m_ex.Integrate(); dVol_ex/= dx*m_h.SizeY();
+  double dVol_ex = m_ex.Integrate(0); dVol_ex/= dx*m_h.SizeY();
 
   // ---- for 1dim model calc crest mean crest distance ----
   double dMeanDist = 0.0;

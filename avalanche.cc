@@ -2,6 +2,7 @@
  $Id: avalanche.cc,v 1.9 2004/09/23 12:41:36 schatz Exp $
  ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 #include "avalanche.h"

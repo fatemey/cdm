@@ -2,6 +2,7 @@
  $Id: sepbubble.cc,v 1.20 2005/07/05 14:11:24 duran Exp $
  ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <limits.h>
 

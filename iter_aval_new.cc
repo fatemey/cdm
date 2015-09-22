@@ -2,6 +2,7 @@
   $Id: iter_aval_new.cc,v 1.11 2005/04/14 08:31:47 duran Exp $
 ******************************************************************************/
 
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 #include "save.h"

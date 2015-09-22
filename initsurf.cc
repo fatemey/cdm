@@ -2,9 +2,12 @@
   $Id: initsurf.cc,v 1.14 2005/01/21 14:36:08 schatz Exp $
 ******************************************************************************/
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <fstream>
 #include <ctype.h>
 
+#include "utils.h"
 #include "func.h"
 #include "initsurf.h"
 #include "initsurfgauss.h"

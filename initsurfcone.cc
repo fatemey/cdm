@@ -2,6 +2,8 @@
   $Id: initsurfgauss.cc,v 1.8 2004/10/01 13:37:28 schatz Exp $
 ******************************************************************************/
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "initsurfcone.h"
 #include "globals.h"
 

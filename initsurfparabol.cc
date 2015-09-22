@@ -2,6 +2,8 @@
   $Id: initsurfparabol.cc,v 1.4 2004/09/30 10:05:08 schatz Exp $
 ******************************************************************************/
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <sstream>
 
 #include "initsurfparabol.h"
