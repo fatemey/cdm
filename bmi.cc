@@ -1,13 +1,21 @@
-#include <cstdio>
-#include <string>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdbool.h>
+#include <string.h>
+
 #include <cstring>
-#include <sstream>
 #include "../include/bmi.h"
 
 #include "globals.h"
 #include "dune_evolution.h"
 
 double current = 0;
+double dt = 0;
+int nt0 = 0;
+int nt = 0;
+int nx = 0;
+int ny = 0;
+double *arr;
 
 /* Store callback */
 Logger logger = NULL;
@@ -38,6 +46,16 @@ extern "C" {
     // initialise simulation object
     m_evol = new dune_evol_3d(m_para);
 
+    // store dimensions
+    nt0 = m_para.getrequired<int>("Nt0");
+    nt = m_para.getrequired<int>("Nt");
+    nx = m_para.getrequired<int>("NX");
+    ny = m_para.getrequired<int>("NY");
+    dt = m_para.getdefault("dt_max", 1.0);
+
+    // allocate data array
+    arr = new double[nx*ny];
+
     return 0;
   }
 
@@ -55,31 +73,23 @@ extern "C" {
 
   BMI_API void get_start_time(double *t)
   {
-    int Nt0 = m_para.getrequired<int>("Nt0");
-    double dt_max = m_para.getdefault("dt_max", 0.0);
-    
-    *t = Nt0 * dt_max;
+    *t = nt0 * dt;
   }
 
   BMI_API void get_end_time(double *t)
   {
-    int Nt = m_para.getrequired<int>("Nt");
-    double dt_max = m_para.getdefault("dt_max", 0.0);
-    
-    *t =  Nt * dt_max;
+    *t =  nt * dt;
   }
 
   BMI_API void get_current_time(double *t)
   {
-    double dt_max = m_para.getdefault("dt_max", 0.0);
-    
-    *t = current * dt_max;
+    *t = current * dt;
   }
 
   BMI_API void get_var_shape(const char *name, int shape[MAXDIMS])
   {
-    shape[0] = 200;
-    shape[1] = 4;
+    shape[0] = nx;
+    shape[1] = ny;
   }
 
   BMI_API void get_var_rank(const char *name, int *rank)
@@ -89,27 +99,30 @@ extern "C" {
   
   BMI_API void get_var_type(const char *name, char *type)
   {
-    strcpy(type, "double");
-  }
-
-  BMI_API void get_var_count(int *count)
-  {
-    *count = 1;
-  }
-    
-  BMI_API void get_var_name(int index, char *name)
-  {
-    strcpy(name, "h");
+    strncpy(type, "double", MAXSTRINGLEN);
   }
 
   BMI_API void get_var(const char *name, void **ptr)
   {
-    m_evol->get_array(name, ptr);
+    // get var data
+    m_evol->get_array(name, arr);
+
+    // create reference
+    *ptr = &*arr;
   }
   
   BMI_API void set_var(const char *name, const void *ptr)
   {
-    //m_evol->set_array(name, ptr);
+    int i;
+
+    // copy pointer
+    //memcpy(arr, ptr, sizeof(arr)); // why doesn't this work?!
+    for (i=0; i<nx*ny; i++) {
+      arr[i] = ((double*)ptr)[i];
+    }
+
+    // set var data
+    m_evol->set_array(name, arr);
   }
 
   BMI_API void inq_compound(const char *name)

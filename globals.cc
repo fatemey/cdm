@@ -690,55 +690,75 @@ void dunedata::save_1d_scalarray( string basename, const CFunc1d& data )
 }
 
 
-void dunedata::get_2d_scalarray( const TFktScal& data, void** ptr )
+void dunedata::get_2d_scalarray( const TFktScal& data, double *arr )
 {
   int i, j;
-  int x = data.SizeX();
-  int y = data.SizeY();
-  double * arr_2d_double;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
   
-  arr_2d_double = new double [x*y];
-  *ptr = arr_2d_double;
   if( m_xline )
-    for (j=0; j<data.SizeY(); ++j) {
-      for (i=0; i<data.SizeX(); ++i)
-        arr_2d_double[j*x+i] = data(i, j);
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        arr[j*nx+i] = data(i, j);
     }
   else
-    for (i=0; i<data.SizeX(); ++i) {
-      for (j=0; j<data.SizeY(); ++j) 
-        arr_2d_double[j*x+i] = data(i, j);
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        arr[i*ny+j] = data(i, j);
     }
-  delete [] arr_2d_double;
 }
 
 
-void dunedata::get_2d_vecarray( const TFktVec& data, int idx, void** ptr )
+void dunedata::get_2d_vecarray( const TFktVec& data, const int idx, double *arr )
 {
   int i, j;
-  int x = data.SizeX();
-  int y = data.SizeY();
-  double * arr_2d_double;
-  
-  arr_2d_double = new double [x*y];
-  *ptr = arr_2d_double;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+
   if( m_xline )
-    for (j=0; j<data.SizeY(); ++j) {
-      for (i=0; i<data.SizeX(); ++i)
-        arr_2d_double[j*x+i] = data(i, j)[idx];
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        arr[j*nx+i] = data(i, j)[idx];
     }
   else
-    for (i=0; i<data.SizeX(); ++i) {
-      for (j=0; j<data.SizeY(); ++j) 
-        arr_2d_double[j*x+i] = data(i, j)[idx];
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j) 
+        arr[i*ny+j] = data(i, j)[idx];
     }
-  delete [] arr_2d_double;
 }
 
-void dunedata::set_2d_scalarray( const TFktScal& data, void** ptr )
+void dunedata::set_2d_scalarray( TFktScal& data, double *arr )
 {
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+  
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        data(i, j) = arr[j*nx+i];
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        data(i, j) = arr[i*ny+j];
+    }
 }
 
-void dunedata::set_2d_vecarray( const TFktVec& data, int idx, void** ptr )
+void dunedata::set_2d_vecarray( TFktVec& data, const int idx, double *arr )
 {
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+  
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        data(i, j)[idx] = arr[j*nx+i];
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        data(i, j)[idx] = arr[i*ny+j];
+    }
 }

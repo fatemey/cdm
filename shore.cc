@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <float.h>
+#include <string.h>
 #include <math.h>
 #include <iostream>
 
@@ -65,10 +66,10 @@ void shore3d::save_arrays()
 }
 
 
-void shore3d::get_array(const char* name, void** ptr)
+void shore3d::get_array(const char* name, double *arr)
 {
 }
 
-void shore3d::set_array(const char* name, void** ptr)
+void shore3d::set_array(const char* name, double *arr)
 {
 }

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
+#include <string.h>
 #include <iostream>
 
 #include "physics_const.h"
@@ -484,10 +485,30 @@ void flux3d_stationary::save_arrays()
     save_2d_scalarray( "rho", m_rho );
 }
 
-void flux3d_stationary::get_array(const char* name, void** ptr)
+void flux3d_stationary::get_array(const char* name, double *arr)
 {
+  if (strcmp(name, "u_x") == 0)
+    get_2d_vecarray(m_u, 0, arr);
+  else if (strcmp(name, "u_x") == 0)
+    get_2d_vecarray(m_u, 1, arr);
+  else if (strcmp(name, "flux_s_x") == 0)
+    get_2d_vecarray(m_flux_sat, 0, arr);
+  else if (strcmp(name, "flux_s_y") == 0)
+    get_2d_vecarray(m_flux_sat, 1, arr);
+  else if (strcmp(name, "rho") == 0)
+    get_2d_scalarray(m_rho, arr);
 }
 
-void flux3d_stationary::set_array(const char* name, void** ptr)
+void flux3d_stationary::set_array(const char* name, double *arr)
 {
+  if (strcmp(name, "u_x") == 0)
+    set_2d_vecarray(m_u, 0, arr);
+  else if (strcmp(name, "u_x") == 0)
+    set_2d_vecarray(m_u, 1, arr);
+  else if (strcmp(name, "flux_s_x") == 0)
+    set_2d_vecarray(m_flux_sat, 0, arr);
+  else if (strcmp(name, "flux_s_y") == 0)
+    set_2d_vecarray(m_flux_sat, 1, arr);
+  else if (strcmp(name, "rho") == 0)
+    set_2d_scalarray(m_rho, arr);
 }

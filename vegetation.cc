@@ -3,6 +3,7 @@
  ******************************************************************************/
 
 #include <math.h>
+#include <string.h>
 
 #include "globals.h"
 #include "func.h"
@@ -147,10 +148,18 @@ void vegetation::save_arrays(){
     save_2d_vecarray( "veget", m_veget );
 }
 
-void vegetation::get_array(const char* name, void** ptr)
+void vegetation::get_array(const char* name, double *arr)
 {
+  if (strcmp(name, "veget_x") == 0)
+    get_2d_vecarray(m_veget, 0, arr);
+  else if (strcmp(name, "veget_y") == 0)
+    get_2d_vecarray(m_veget, 1, arr);
 }
 
-void vegetation::set_array(const char* name, void** ptr)
+void vegetation::set_array(const char* name, double *arr)
 {
+  if (strcmp(name, "veget_x") == 0)
+    set_2d_vecarray(m_veget, 0, arr);
+  else if (strcmp(name, "veget_y") == 0)
+    set_2d_vecarray(m_veget, 1, arr);
 }

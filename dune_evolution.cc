@@ -129,7 +129,7 @@ void dune_evol_3d::init(const dunepar& par){
     init_h= arrayinit::create(par);
     init_h->init_2d_scal( m_h );
     delete init_h;
-    
+
     if( par.exists("nonerod.Init-Surf") )
         init_h= arrayinit::create(par, "nonerod.");
     else
@@ -157,36 +157,64 @@ void dune_evol_3d::save_arrays()
     save_2d_vecarray( "flux", m_flux );
 }
 
-void dune_evol_3d::get_array(const char* name, void** ptr)
+void dune_evol_3d::get_array(const char* name, double *arr)
 {
   if (strcmp(name, "dhdt") == 0)
-    get_2d_scalarray(m_dh_dt, ptr);
+    get_2d_scalarray(m_dh_dt, arr);
   else if (strcmp(name, "h") == 0)
-    get_2d_scalarray(m_h, ptr);
+    get_2d_scalarray(m_h, arr);
   else if (strcmp(name, "shear_x") == 0)
-    get_2d_vecarray(m_tau, 1, ptr);
+    get_2d_vecarray(m_tau, 0, arr);
   else if (strcmp(name, "shear_y") == 0)
-    get_2d_vecarray(m_tau, 2, ptr);
+    get_2d_vecarray(m_tau, 1, arr);
   else if (strcmp(name, "flux_x") == 0)
-    get_2d_vecarray(m_flux, 1, ptr);
+    get_2d_vecarray(m_flux, 0, arr);
   else if (strcmp(name, "flux_y") == 0)
-    get_2d_vecarray(m_flux, 2, ptr);
+    get_2d_vecarray(m_flux, 1, arr);
+  else if (strcmp(name, "h_sep") == 0 ||
+           strcmp(name, "stall") == 0 ||
+           strcmp(name, "shear_pert_x") == 0 ||
+           strcmp(name, "shear_pert_y") == 0)
+    m_calcshear->get_array(name, arr);
+  else if (strcmp(name, "u_x") == 0 ||
+           strcmp(name, "u_y") == 0 ||
+           strcmp(name, "flux_s_x") == 0 ||
+           strcmp(name, "flux_s_y") == 0 ||
+           strcmp(name, "rho") == 0)
+    m_calcflux->get_array(name, arr);
+  else if (strcmp(name, "veget_x") == 0 ||
+           strcmp(name, "veget_y") == 0)
+    m_grass->get_array(name, arr);
 }
 
-void dune_evol_3d::set_array(const char* name, void** ptr)
+void dune_evol_3d::set_array(const char* name, double *arr)
 {
   if (strcmp(name, "dhdt") == 0)
-    set_2d_scalarray(m_dh_dt, ptr);
+    set_2d_scalarray(m_dh_dt, arr);
   else if (strcmp(name, "h") == 0)
-    set_2d_scalarray(m_h, ptr);
+    set_2d_scalarray(m_h, arr);
   else if (strcmp(name, "shear_x") == 0)
-    set_2d_vecarray(m_tau, 1, ptr);
+    set_2d_vecarray(m_tau, 0, arr);
   else if (strcmp(name, "shear_y") == 0)
-    set_2d_vecarray(m_tau, 2, ptr);
+    set_2d_vecarray(m_tau, 1, arr);
   else if (strcmp(name, "flux_x") == 0)
-    set_2d_vecarray(m_flux, 1, ptr);
+    set_2d_vecarray(m_flux, 0, arr);
   else if (strcmp(name, "flux_y") == 0)
-    set_2d_vecarray(m_flux, 2, ptr);
+    set_2d_vecarray(m_flux, 1, arr);
+  else if (strcmp(name, "h_sep") == 0 ||
+           strcmp(name, "stall") == 0 ||
+           strcmp(name, "shear_pert_x") == 0 ||
+           strcmp(name, "shear_pert_y") == 0)
+    m_calcshear->set_array(name, arr);
+  else if (strcmp(name, "u_x") == 0 ||
+           strcmp(name, "u_y") == 0 ||
+           strcmp(name, "flux_s_x") == 0 ||
+           strcmp(name, "flux_s_y") == 0 ||
+           strcmp(name, "rho") == 0)
+    m_calcflux->set_array(name, arr);
+  else if (strcmp(name, "veget_x") == 0 ||
+           strcmp(name, "veget_y") == 0)
+    m_grass->set_array(name, arr);
 }
 
 /*!  This is the function which computes the actual change in the surface
