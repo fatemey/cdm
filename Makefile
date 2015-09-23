@@ -12,7 +12,7 @@ FFTW_LIB = /opt/local/lib
 TESTOPT = -g -ggdb
 
 C++	= g++
-CFLAGS	= -ansi -Wall -O3 -pedantic-errors -funroll-loops ${TESTOPT}
+CFLAGS	= -ansi -Wall -O3 -std=c++11 -pedantic-errors -funroll-loops ${TESTOPT}
 INCPATH = -I. -I${FFTW_INC}
 MY_DEFS =-DPT_VERBOSITY=20 -DPT_SAFETY=1 -DPDE_3D 
 

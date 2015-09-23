@@ -6,14 +6,8 @@
 #include "math.h"
 #include "utils.h"
 
-#ifndef round
+#ifdef _MSC_VER
 double round( double d ){ return floor( d + 0.5 ); }
-#endif
-
-#ifndef trunc
 double trunc(double d){ return (d>0) ? floor(d) : ceil(d) ; }
-#endif
-
-#ifndef isfinite
 int isfinite(double x){ return _finite(x); }
 #endif
