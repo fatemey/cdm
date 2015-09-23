@@ -28,6 +28,8 @@ public:
     virtual void shiftback(const int plusminus);
 
     virtual void save_arrays();
+    virtual void get_array(const char* name, void** ptr);
+    virtual void set_array(const char* name, void** ptr);
 
 private:
     

@@ -30,9 +30,6 @@ public:
   /*!  Time elapsed since start of evolution.  */
   static double time() { if( instance ) return instance->m_time;
   						else return 0.0; }
-						 
-  /*!  Get state parameter array.  */
-  virtual void get_var(const char* name, void** ptr)=0;
   
 protected:
   /*!  Implementation of the time evolution step.  To be implemented by

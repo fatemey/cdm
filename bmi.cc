@@ -104,9 +104,14 @@ extern "C" {
 
   BMI_API void get_var(const char *name, void **ptr)
   {
-    m_evol->get_var(name, ptr);
+    m_evol->get_array(name, ptr);
   }
   
+  BMI_API void set_var(const char *name, const void *ptr)
+  {
+    //m_evol->set_array(name, ptr);
+  }
+
   BMI_API void inq_compound(const char *name)
   {
     // pass

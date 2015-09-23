@@ -182,3 +182,10 @@ void shear::save_arrays()
     //if(m_calc_veget)	save_2d_scalarray("rho_veget", m_rho_veget);
 }
 
+void shear::get_array(const char* name, void** ptr)
+{
+}
+
+void shear::set_array(const char* name, void** ptr)
+{
+}

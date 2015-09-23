@@ -157,14 +157,36 @@ void dune_evol_3d::save_arrays()
     save_2d_vecarray( "flux", m_flux );
 }
 
-void dune_evol_3d::get_var(const char* name, void** ptr)
+void dune_evol_3d::get_array(const char* name, void** ptr)
 {
-  if (strcmp(name, "h") == 0)
+  if (strcmp(name, "dhdt") == 0)
+    get_2d_scalarray(m_dh_dt, ptr);
+  else if (strcmp(name, "h") == 0)
     get_2d_scalarray(m_h, ptr);
   else if (strcmp(name, "shear_x") == 0)
     get_2d_vecarray(m_tau, 1, ptr);
   else if (strcmp(name, "shear_y") == 0)
     get_2d_vecarray(m_tau, 2, ptr);
+  else if (strcmp(name, "flux_x") == 0)
+    get_2d_vecarray(m_flux, 1, ptr);
+  else if (strcmp(name, "flux_y") == 0)
+    get_2d_vecarray(m_flux, 2, ptr);
+}
+
+void dune_evol_3d::set_array(const char* name, void** ptr)
+{
+  if (strcmp(name, "dhdt") == 0)
+    set_2d_scalarray(m_dh_dt, ptr);
+  else if (strcmp(name, "h") == 0)
+    set_2d_scalarray(m_h, ptr);
+  else if (strcmp(name, "shear_x") == 0)
+    set_2d_vecarray(m_tau, 1, ptr);
+  else if (strcmp(name, "shear_y") == 0)
+    set_2d_vecarray(m_tau, 2, ptr);
+  else if (strcmp(name, "flux_x") == 0)
+    set_2d_vecarray(m_flux, 1, ptr);
+  else if (strcmp(name, "flux_y") == 0)
+    set_2d_vecarray(m_flux, 2, ptr);
 }
 
 /*!  This is the function which computes the actual change in the surface

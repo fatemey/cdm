@@ -37,7 +37,9 @@ public:
     virtual double SatLength_upwind(double u_star);
     
     virtual void save_arrays();
-    
+    virtual void get_array(const char* name, void** ptr);
+    virtual void set_array(const char* name, void** ptr);
+
 protected:
     bool m_x_periodic, m_y_periodic;
     

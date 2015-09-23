@@ -484,3 +484,10 @@ void flux3d_stationary::save_arrays()
     save_2d_scalarray( "rho", m_rho );
 }
 
+void flux3d_stationary::get_array(const char* name, void** ptr)
+{
+}
+
+void flux3d_stationary::set_array(const char* name, void** ptr)
+{
+}

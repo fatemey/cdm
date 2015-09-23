@@ -64,3 +64,11 @@ void shore3d::save_arrays()
 {
 }
 
+
+void shore3d::get_array(const char* name, void** ptr)
+{
+}
+
+void shore3d::set_array(const char* name, void** ptr)
+{
+}

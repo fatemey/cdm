@@ -25,7 +25,9 @@ public:
     //virtual bool Save() { return false; }
     
     virtual void save_arrays();
-    
+    virtual void get_array(const char* name, void** ptr);
+    virtual void set_array(const char* name, void** ptr);
+
     void set_ustar( double u_star );
     
 protected:

@@ -146,3 +146,11 @@ void vegetation::shiftback(const int plusminus)
 void vegetation::save_arrays(){
     save_2d_vecarray( "veget", m_veget );
 }
+
+void vegetation::get_array(const char* name, void** ptr)
+{
+}
+
+void vegetation::set_array(const char* name, void** ptr)
+{
+}

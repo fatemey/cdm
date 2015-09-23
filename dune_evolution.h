@@ -53,11 +53,11 @@ public:
     virtual void init(const dunepar& par);
 
     virtual void save_arrays();
+    virtual void get_array(const char* name, void** ptr);
+    virtual void set_array(const char* name, void** ptr);
     
     virtual double step_implementation();
 
-    virtual void get_var(const char* name, void** ptr);
-    
 protected:
     virtual double update_height(double halfmeanLength);
     virtual void volume_correction(double timestep);

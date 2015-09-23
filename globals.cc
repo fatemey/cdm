@@ -734,3 +734,11 @@ void dunedata::get_2d_vecarray( const TFktVec& data, int idx, void** ptr )
     }
   delete [] arr_2d_double;
 }
+
+void dunedata::set_2d_scalarray( const TFktScal& data, void** ptr )
+{
+}
+
+void dunedata::set_2d_vecarray( const TFktVec& data, int idx, void** ptr )
+{
+}
