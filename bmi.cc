@@ -1,8 +1,5 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdbool.h>
 #include <string.h>
-
 #include <cstring>
 #include "../include/bmi.h"
 
