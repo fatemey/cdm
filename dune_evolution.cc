@@ -228,7 +228,12 @@ void dune_evol_3d::set_array(const char* name, double *arr)
 
 double dune_evol_3d::step_implementation()
 {
-    double newwind, angle, timestep, halfmeanLength = 0, m_ustar0, factor=0;
+  return step_implementation(m_dtmax);
+}
+
+double dune_evol_3d::step_implementation(double timestep)
+{
+    double newwind, angle, halfmeanLength = 0, m_ustar0, factor=0;
     
     m_wind->advance( evolution::time() );
     newwind= m_wind->direction();
@@ -249,13 +254,10 @@ double dune_evol_3d::step_implementation()
         m_calcflux->calc( m_flux_in, m_flux, m_h, m_h_nonerod, m_tau, m_gamma );
         
         m_hprev = m_h; // copy previous profile;
-        timestep= update_height(halfmeanLength);
+        timestep= update_height(halfmeanLength, timestep);
         m_avalanche->calc(m_h, m_h_nonerod);
         
-        update_dhdt();
-        
-    }else{
-        timestep = m_dtmax;
+        update_dhdt(timestep);
     }
            
     // VEGETATION
@@ -282,12 +284,9 @@ double dune_evol_3d::step_implementation()
 
 /*!  Computes the height profile change from the divergence of the sand flux. The return value is the time step.  */
 
-double dune_evol_3d::update_height(double halfmeanLength)
+double dune_evol_3d::update_height(double halfmeanLength, double timestep)
 {
-    double timestep;
     int x, y;
-    
-    timestep = m_dtmax;
 
     m_maxchange= 0.0;
     for( y= 0; y< duneglobals::ny(); ++y ){
@@ -331,10 +330,8 @@ double dune_evol_3d::update_height(double halfmeanLength)
 }
 
 // Update dhdt
-void dune_evol_3d::update_dhdt()
+void dune_evol_3d::update_dhdt(double timestep)
 {
-    double timestep = m_dtmax;
-    
     for( int y= 0; y< duneglobals::ny(); ++y ){
         for( int x= 0; x< duneglobals::nx(); ++x ) {
             m_dh_dt(x, y) = (m_h(x, y) - m_hprev(x, y)) / timestep;

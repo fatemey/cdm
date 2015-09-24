@@ -6,8 +6,7 @@
 #include "globals.h"
 #include "dune_evolution.h"
 
-double current = 0;
-double dt = 0;
+double dtmax = 0;
 int nt0 = 0;
 int nt = 0;
 int nx = 0;
@@ -48,7 +47,7 @@ extern "C" {
     nt = m_para.getrequired<int>("Nt");
     nx = m_para.getrequired<int>("NX");
     ny = m_para.getrequired<int>("NY");
-    dt = m_para.getdefault("dt_max", 1.0);
+    dtmax = m_para.getdefault("dt_max", 1.0);
 
     // allocate data array
     arr = new double[nx*ny];
@@ -58,8 +57,12 @@ extern "C" {
 
   BMI_API int update(double dt)
   {
-    m_evol->step();
-    current += 1;
+    if (dt < -1)
+      m_evol->jump(dt);
+    if (dt == -1)
+      m_evol->step();
+    else
+      m_evol->step(dt);
     return 0;
   }
 
@@ -70,17 +73,17 @@ extern "C" {
 
   BMI_API void get_start_time(double *t)
   {
-    *t = nt0 * dt;
+    *t = nt0 * dtmax;
   }
 
   BMI_API void get_end_time(double *t)
   {
-    *t =  nt * dt;
+    *t =  nt * dtmax;
   }
 
   BMI_API void get_current_time(double *t)
   {
-    *t = current * dt;
+    *t = m_evol->time();
   }
 
   BMI_API void get_var_shape(const char *name, int shape[MAXDIMS])

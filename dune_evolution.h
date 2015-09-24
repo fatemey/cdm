@@ -57,13 +57,16 @@ public:
     virtual void set_array(const char* name, double *arr);
     
     virtual double step_implementation();
+    virtual double step_implementation(double timestep);
+
+    void jump(double dt) { steps(steps() + dt / m_dtmax); time(time() + dt); }
 
 protected:
-    virtual double update_height(double halfmeanLength);
+    virtual double update_height(double halfmeanLength, double timestep);
     virtual void volume_correction(double timestep);
     virtual int shiftback(int shift);
 
-    virtual void update_dhdt();
+    virtual void update_dhdt(double timestep);
 
     /*!  Object giving wind speed and direction.  */
     wind *m_wind;

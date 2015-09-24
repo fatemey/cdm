@@ -23,18 +23,28 @@ public:
   
   /*!  Advances m_steps and m_time and calls step_implementation().  */
   void step() { m_started= true; m_time += step_implementation(); ++m_steps; }
+  void step(double dt) { m_started= true; m_time += step_implementation(dt); ++m_steps; }
   
   /*!  Number of evolution steps done so far.  */
   static int steps() { if( instance ) return instance->m_steps; 
 						else return 0; }
+
   /*!  Time elapsed since start of evolution.  */
   static double time() { if( instance ) return instance->m_time;
   						else return 0.0; }
-  
+
+  /*!  Overload set functions for time and steps.  */
+  static void steps(int n) { if( instance ) instance->m_steps = n; } 
+  static void time(double t) { if( instance ) instance->m_time = t; } 
+
+  /*!  Jump in time without evaluating anything. */
+  void jump(double dt) {}
+
 protected:
   /*!  Implementation of the time evolution step.  To be implemented by
     subclass.  Must return time interval to be added to m_time.  */
   virtual double step_implementation()=0;
+  virtual double step_implementation(double dt)=0;
 
 private:
   /*!  Flag indicating whether a simulation has started already.  Set to false
