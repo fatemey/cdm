@@ -1,3 +1,4 @@
+.*
 *.o
 *.d
 *.dat
@@ -12,3 +13,14 @@ bin
 *.suo
 *.vcxproj.*
 *.*sdf
+config.*
+config
+configure
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+libcdm.la
+libtool
+stamp-h1
+output
