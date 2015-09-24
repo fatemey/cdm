@@ -30,12 +30,12 @@ public:
   /*!  Time elapsed since start of evolution.  */
   static double time() { if( instance ) return instance->m_time;
   						else return 0.0; }
-						 
+  
 protected:
   /*!  Implementation of the time evolution step.  To be implemented by
     subclass.  Must return time interval to be added to m_time.  */
   virtual double step_implementation()=0;
-  
+
 private:
   /*!  Flag indicating whether a simulation has started already.  Set to false
     in the constructor and to true in step().  */

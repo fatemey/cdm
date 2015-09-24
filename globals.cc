@@ -596,7 +596,7 @@ void dunedata::save_2d_scalarray( string basename, const TFktScal& data )
 {
     ofstream *os;
     int x, y;
-    
+
     if( m_par.getdefault( "dontsave." + basename, false, false ) )
         return;
     os= open_writeout( basename );
@@ -604,7 +604,7 @@ void dunedata::save_2d_scalarray( string basename, const TFktScal& data )
     // PARTELI BEGIN
     if( duneglobals::high_precision()) (*os) << fixed << setprecision(16);
     // PARTELI END
-    
+
     if( m_xline )
         for( y= 0; y< data.SizeY(); ++y ) {
             for( x= 0; x< data.SizeX(); ++x )
@@ -691,3 +691,76 @@ void dunedata::save_1d_scalarray( string basename, const CFunc1d& data )
     delete os;
 }
 
+
+void dunedata::get_2d_scalarray( const TFktScal& data, double *arr )
+{
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+  
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        arr[j*nx+i] = data(i, j);
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        arr[i*ny+j] = data(i, j);
+    }
+}
+
+
+void dunedata::get_2d_vecarray( const TFktVec& data, const int idx, double *arr )
+{
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        arr[j*nx+i] = data(i, j)[idx];
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j) 
+        arr[i*ny+j] = data(i, j)[idx];
+    }
+}
+
+void dunedata::set_2d_scalarray( TFktScal& data, double *arr )
+{
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+  
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        data(i, j) = arr[j*nx+i];
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        data(i, j) = arr[i*ny+j];
+    }
+}
+
+void dunedata::set_2d_vecarray( TFktVec& data, const int idx, double *arr )
+{
+  int i, j;
+  int nx = data.SizeX();
+  int ny = data.SizeY();
+  
+  if( m_xline )
+    for (j=0; j<ny; ++j) {
+      for (i=0; i<nx; ++i)
+        data(i, j)[idx] = arr[j*nx+i];
+    }
+  else
+    for (i=0; i<nx; ++i) {
+      for (j=0; j<ny; ++j)
+        data(i, j)[idx] = arr[i*ny+j];
+    }
+}

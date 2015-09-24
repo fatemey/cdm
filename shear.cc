@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #include "globals.h"
 //#include "save.h"
@@ -184,3 +185,26 @@ void shear::save_arrays()
     //if(m_calc_veget)	save_2d_scalarray("rho_veget", m_rho_veget);
 }
 
+void shear::get_array(const char* name, double *arr)
+{
+  if (strcmp(name, "h_sep") == 0)
+    get_2d_scalarray(m_hSepBub, arr);
+  else if (strcmp(name, "stall") == 0)
+    get_2d_scalarray(m_stall, arr);
+  else if (strcmp(name, "shear_pert_x") == 0)
+    get_2d_vecarray(m_TauP, 1, arr);
+  else if (strcmp(name, "shear_pert_y") == 0)
+    get_2d_vecarray(m_TauP, 2, arr);
+}
+
+void shear::set_array(const char* name, double *arr)
+{
+  if (strcmp(name, "h_sep") == 0)
+    set_2d_scalarray(m_hSepBub, arr);
+  else if (strcmp(name, "stall") == 0)
+    set_2d_scalarray(m_stall, arr);
+  else if (strcmp(name, "shear_pert_x") == 0)
+    set_2d_vecarray(m_TauP, 1, arr);
+  else if (strcmp(name, "shear_pert_y") == 0)
+    set_2d_vecarray(m_TauP, 2, arr);
+}

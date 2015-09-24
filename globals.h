@@ -255,7 +255,13 @@ public:
     
     /*!  Save arrays (discretised physical quantities) to disk.  */
     virtual void save_arrays()=0;
-    
+
+    /*!  Get state parameter array.  */
+    virtual void get_array(const char* name, double *arr)=0;
+
+    /*!  Set state parameter array.  */
+    virtual void set_array(const char* name, double *arr)=0;
+
     static void save_all_data();
     
 protected:
@@ -263,6 +269,10 @@ protected:
     void save_2d_scalarray( string basename, const TFktScal& data );
     void save_2d_vecarray( string basename, const TFktVec& data );
     void save_1d_scalarray( string basename, const CFunc1d& data );
+    void get_2d_scalarray( const TFktScal& data, double *arr );
+    void get_2d_vecarray( const TFktVec& data, const int idx, double *arr );
+    void set_2d_scalarray( TFktScal& data, double *arr );
+    void set_2d_vecarray( TFktVec& data, const int idx, double *arr );
     
 private:
     /*!  True if x is to be the column index in the saved files (varying along a
